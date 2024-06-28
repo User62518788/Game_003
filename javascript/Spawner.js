@@ -56,6 +56,9 @@ class TargetSpawner {
         if (index < 0) return;
         this.scene.remove(target_);
         this.#targetList[index].remove();
+
+        const POP_SOUND = new Audio("./public/audio/pop.mp3");
+        POP_SOUND.play();
         
         this.spawnTarget();
     }
