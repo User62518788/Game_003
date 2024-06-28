@@ -29,8 +29,8 @@ PLAY_BUTTON.addEventListener("click", () => {
 function initConfig() {
     playerConfig.camera.fov = FOV_INPUT.value;
     playerConfig.player_speed = PLAYER_SPEED_INPUT.value;
-    controllerConfig.camera.sensitivity[0] = SENSITIVITY_INPUT.value;
-    controllerConfig.camera.sensitivity[1] = SENSITIVITY_INPUT.value;
+    controllerConfig.camera.sensitivity.x = SENSITIVITY_INPUT.value;
+    controllerConfig.camera.sensitivity.y = SENSITIVITY_INPUT.value;
     spawnerConfig.target_number = TARGET_NUMBER_INPUT.value;
     spawnerConfig.target_size = TARGET_SIZE_INPUT.value;
     spawnerConfig.size[0] = SPAWNER_WIDTH_INPUT.value;
