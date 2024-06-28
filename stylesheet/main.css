@@ -1,0 +1,118 @@
+* {
+    user-select: none;
+}
+body {
+    margin: 0;
+}
+#crosshair {
+    width: 4px;
+    height: 4px;
+    border: 1px solid black;
+    border-radius: 100%;
+    background-color: rgb(255, 255, 255);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    z-index: 0;
+    display: none;
+}
+#menu-container {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+#menu {
+    aspect-ratio: 3 / 4;
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    background-color: rgb(24, 24, 24);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: space-evenly;
+}
+#menu-title {
+    border-radius: 10px 10px 0 0;
+    background-color: rgb(14, 14, 14);
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+#button-container {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#button-selection {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    
+}
+#button-selection > * {
+    background-color: rgb(65, 65, 65);
+    color: white;
+    border: 0;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 22px;
+}
+#button-selection > *:hover {
+    background-color: rgb(224, 224, 224);
+    color: black;
+}
+#settings {
+    aspect-ratio: 3 / 4;
+    width: 90%;
+    max-width: 500px;
+    height: auto;
+    background-color: rgb(24, 24, 24);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+#settings-title {
+    border-radius: 10px 10px 0 0;
+    background-color: rgb(14, 14, 14);
+    font-size: 24px;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+#input-container {
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+#input-indent-container {
+    width: 90%;
+    height: 90%;
+}
+#input-indent-container > * {
+    margin-bottom: 15px;
+}
+.title {
+    color: white;
+    font-size: 22px;
+}
+.input {
+    width: 100%;
+    font-size: 18px;
+    border: 0;
+    padding: 0;
+}
+

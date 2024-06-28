@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>3D Aim Trainer</title>
+        <link rel="stylesheet" href="./stylesheet/main.css"></link>
+    </head>
+    <body>
+        <div id="menu-container">
+            <div id="settings">
+                <div id="settings-title">Settings</div>
+                <div id="input-container">
+                    <div id="input-indent-container">
+                        <div id="fov-container">
+                            <div id="fov-title" class="title">Field Of View (FOV): </div>
+                            <input id="fov-input" class="input" type="number" placeholder="Recommend 50 - 140" value="70" min="1" max="179" onkeyup="enforceMinMax(this)">
+                        </div>
+                        <div id="target-number-container">
+                            <div id="target-number-title" class="title">Number Of Targets: </div>
+                            <input id="target-number-input" class="input" type="number" value="3" min="1" max="200" onkeyup="enforceMinMax(this)">
+                        </div>
+                        <div id="target-size-container">
+                            <div id="target-size-title" class="title">Size Of Targets: </div>
+                            <input id="target-size-input" class="input" type="number" value="2" min="0.1" max="100" onkeyup="enforceMinMax(this)">
+                        </div>
+                        <div id="spawner-width-container">
+                            <div id="spawner-width-title" class="title">Spawner Width: </div>
+                            <input id="spawner-width-input" class="input" type="number" value="15" min="0.1" max="100" onkeyup="enforceMinMax(this)">
+                        </div>
+                        <div id="spawner-height-container">
+                            <div id="spawner-height-title" class="title">Spawner Height: </div>
+                            <input id="spawner-height-input" class="input" type="number" value="15" min="0.1" max="100" onkeyup="enforceMinMax(this)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="menu">
+                <div id="menu-title">Menu</div>
+                <div id="button-container">
+                    <div id="button-selection">
+                        <button id="play-button">Play</button>
+                        <button id="settings-button">Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="crosshair"></div>
+        <script src="./library/three.js"></script>
+        <script src="./javascript/Spawner.js"></script>
+        <script src="./javascript/Controller.js"></script>
+        <script src="./javascript/main.js"></script>
+    </body>
+</html>
