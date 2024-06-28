@@ -7,12 +7,15 @@ class Controller {
     };
     #raycaster;
     #pointer;
+    #keyboard = {};
+    #playerSpeed;
 
     constructor(scene_, camera_, controllerConfig_) {
         this.scene = scene_;
         this.camera = camera_;
         this.#sensitivity.x = controllerConfig_.camera.sensitivity.x;
         this.#sensitivity.y = controllerConfig_.camera.sensitivity.y;
+        this.#playerSpeed = controllerConfig_.playerConfig.player_speed / 10;
     }
     initShootControl = (spawner_) => {
         this.#raycaster = new THREE.Raycaster();
@@ -71,6 +74,36 @@ class Controller {
 
             this.#pointerPosition[0] = newX;
             this.#pointerPosition[1] = newY;
+        });
+    }
+    initMovementControl() {
+        this.initMovementListeners();
+        
+    }
+    move() {
+        if (this.#keyboard[87]) {
+            camera.position.x -= +Math.sin(this.camera.rotation.y) * this.#playerSpeed;
+            camera.position.z += -Math.cos(this.camera.rotation.y) * this.#playerSpeed;
+        }
+        if (this.#keyboard[83]) {
+            camera.position.x += Math.sin(this.camera.rotation.y) * this.#playerSpeed;
+            camera.position.z -= -Math.cos(this.camera.rotation.y) * this.#playerSpeed;
+        }
+        if (this.#keyboard[65]) {
+            camera.position.x += Math.sin(this.camera.rotation.y - Math.PI / 2) * this.#playerSpeed;
+            camera.position.z += -Math.cos(this.camera.rotation.y + Math.PI / 2) * this.#playerSpeed;
+        }
+        if (this.#keyboard[68]) {
+            camera.position.x -= +Math.sin(this.camera.rotation.y - Math.PI / 2) * this.#playerSpeed;
+            camera.position.z -= -Math.cos(this.camera.rotation.y + Math.PI / 2) * this.#playerSpeed;
+        }
+    }
+    initMovementListeners() {
+        window.addEventListener("keydown", (event_) => {
+            this.#keyboard[event_.keyCode] = true;
+        });
+        window.addEventListener("keyup", (event_) => {
+            this.#keyboard[event_.keyCode] = false;
         });
     }
 }

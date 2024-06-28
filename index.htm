@@ -6,7 +6,7 @@
     </head>
     <body>
         <div id="menu-container">
-            <div id="settings">
+            <div id="settings" style="display: none;">
                 <div id="settings-title">Settings</div>
                 <div id="input-container">
                     <div id="input-indent-container">
@@ -29,6 +29,18 @@
                         <div id="spawner-height-container">
                             <div id="spawner-height-title" class="title">Spawner Height: </div>
                             <input id="spawner-height-input" class="input" type="number" value="15" min="0.1" max="100" onkeyup="enforceMinMax(this)">
+                        </div>
+                        <div id="player-speed-container">
+                            <div id="player-speed-title" class="title">Player Speed: </div>
+                            <input id="player-speed-input" class="input" type="number" placeholder="Recommend 2" value="0" min="0.1" max="100" onkeyup="enforceMinMax(this)">
+                        </div>
+                        <div id="sensitivity-container">
+                            <div id="sensitivity-title" class="title">Sensitivity: </div>
+                            <input id="sensitivity-input" class="input" type="number" value="0.6" min="0.1" max="100" onkeyup="enforceMinMax(this)">
+                        </div>
+                        <div id="spawner-visible-container">
+                            <div id="spawner-visible-title" class="title">Spawner Visibility: </div>
+                            <input id="spawner-visible-input" type="checkbox" checked="true">
                         </div>
                     </div>
                 </div>

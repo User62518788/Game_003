@@ -65,7 +65,7 @@ class TargetSpawner {
         let geometry = new THREE.BoxGeometry(this.#targetSize, this.#targetSize, this.#targetSize);
 
         let color = new THREE.Color("rgb(0, 0, 255)");
-        let material = new THREE.MeshBasicMaterial( {color: color} );
+        let material = new THREE.MeshStandardMaterial( {color: color} );
 
         let mesh = new THREE.Mesh(geometry, material);
         mesh.position.set(positionx, positiony, positionz);

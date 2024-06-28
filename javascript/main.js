@@ -10,6 +10,9 @@ const TARGET_NUMBER_INPUT = document.getElementById("target-number-input");
 const TARGET_SIZE_INPUT = document.getElementById("target-size-input");
 const SPAWNER_WIDTH_INPUT = document.getElementById("spawner-width-input");
 const SPAWNER_HEIGHT_INPUT = document.getElementById("spawner-height-input");
+const SPAWNER_VISIBLE_INPUT = document.getElementById("spawner-visible-input");
+const PLAYER_SPEED_INPUT = document.getElementById("player-speed-input");
+const SENSITIVITY_INPUT = document.getElementById("sensitivity-input");
 
 const CROSSHAIR = document.getElementById("crosshair");
 
@@ -25,10 +28,14 @@ PLAY_BUTTON.addEventListener("click", () => {
 
 function initConfig() {
     playerConfig.camera.fov = FOV_INPUT.value;
+    playerConfig.player_speed = PLAYER_SPEED_INPUT.value;
+    controllerConfig.camera.sensitivity[0] = SENSITIVITY_INPUT.value;
+    controllerConfig.camera.sensitivity[1] = SENSITIVITY_INPUT.value;
     spawnerConfig.target_number = TARGET_NUMBER_INPUT.value;
     spawnerConfig.target_size = TARGET_SIZE_INPUT.value;
     spawnerConfig.size[0] = SPAWNER_WIDTH_INPUT.value;
     spawnerConfig.size[1] = SPAWNER_HEIGHT_INPUT.value;
+    spawnerConfig.visible = SPAWNER_VISIBLE_INPUT.checked;
 }
 
 function enforceMinMax(element_) {
@@ -52,16 +59,18 @@ SETTINGS_BUTTON.addEventListener("click", () => {
     }
 });
 
-let scene, camera, renderer;
+let scene, camera, renderer, controller;
 let loaded = false;
 
 let playerConfig = {
+    player_speed: 2,
     camera: {
         fov: 70,
         positionZ: 15,
     }
 }
 let controllerConfig = {
+    playerConfig,
     camera: {
         sensitivity: {
             x: 0.6,
@@ -74,6 +83,7 @@ let spawnerConfig = {
     target_number: 3,
     position: [0, 0, 0],
     size: [15, 15],
+    visible: false,
     
 }
 let spawnerList = new Array();
@@ -105,23 +115,38 @@ function initScene() {
     
     document.body.appendChild(renderer.domElement);
     initSkybox(scene);
+    initLighting(scene)
 
     createSpawner(scene);
-    initController(scene, camera, controllerConfig);
+    controller = initController(scene, camera, controllerConfig);
+}
+
+function initLighting(scene_) {
+    const color = 0xFFFFFF;
+    const intensity = 1;
+    const directionalLight = new THREE.DirectionalLight(color, intensity);
+
+    const ambientLight = new THREE.AmbientLight(color, 0.3);
+
+    directionalLight.position.set(10, 900, 900);
+    directionalLight.target.position.set(0, 0, 0);
+
+    scene_.add(ambientLight);
+    scene_.add(directionalLight);
 }
 
 function initController(scene_, camera_, controllerConfig_) {
     const controller = new Controller(scene_, camera_, controllerConfig_);
     controller.initCameraControl();
     controller.initShootControl(spawnerList[0]);
+    controller.initMovementControl();
+    return controller;
 }
 
 function createSpawner(scene_) {
-    const position = [0, 0, 0];
-    const size = [15, 15];
-
     const spawner = new TargetSpawner(scene_, spawnerConfig);
-    spawner.toggleDisplay();
+    
+    if (spawnerConfig.visible) spawner.toggleDisplay();
     spawnerList.push(spawner);
     
     return spawner;
@@ -129,6 +154,7 @@ function createSpawner(scene_) {
 
 function animate() {
     renderer.render(scene, camera);
+    controller.move();
 }
 
 function random(min_, max_) {
